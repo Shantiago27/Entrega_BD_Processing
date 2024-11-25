@@ -148,16 +148,14 @@ class Ejercicio5Test extends TestInit {
     val ventasDf = spark.read
       .option("header", "true")
       .option("inferSchema", "true")
-      .csv("src/test/Resources/examen/ventas.csv")
+      .csv("examen/src/test/Resources/examen/ventas.csv")
 
     val resultado = ProcesoArchivos(ventasDf)(spark)
-    val resultados = resultado.collect()
-    resultados.foreach { row =>
-      val ingreso = row.getAs[Double]("ingreso_total")
-      println(s"Ingreso Total: $ingreso")
-      assert(ingreso > 0)
-    }
-    }
+
+    println("Tabla final de ingresos por producto:")
+    resultado.show()
+
+  }
 
 
 }

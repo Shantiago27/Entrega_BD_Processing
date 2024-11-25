@@ -127,6 +127,9 @@ import org.apache.spark.rdd.RDD
     def ProcesoArchivos(ventas: DataFrame)(spark: SparkSession): DataFrame = {
       val ventasConIngreso = ventas.withColumn("ingreso_total", col("cantidad") * col("precio_unitario"))
 
+      println("Dataframe con el ingreso total por id_venta")
+      ventasConIngreso.show(50 )
+
       val ingresoPorProducto = ventasConIngreso
         .groupBy("id_producto")
         .sum("ingreso_total")
